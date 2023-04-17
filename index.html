@@ -26,6 +26,12 @@
         .zero{
             width: 210px;
         }
+        .expression{
+            height: 20px;
+            width: 280px;
+            background-color: beige;
+            color: black;
+        }
     </style>
 </head>
 <body>
@@ -34,7 +40,7 @@
             Ans = &nbsp;
         </p>
         <p class="expression">
-
+            
         </p>
     </div>
     <div class = 'btn-wrap'>
@@ -51,21 +57,35 @@
         <button class = 'btn-num'>7</button>
         <button class = 'btn-num'>8</button>
         <button class = 'btn-num'>9</button>
-        <button class = 'btn-oper'>*</button>
+        <button class = 'btn-oper'>x</button>
         <button class = 'btn-num zero'>0</button>
         
         <button class = 'btn-oper'>/</button>
 
     </div>
     <script>
-        let result = document.querySelector('.text-num')
-        let exp = document.querySelector('.expression')
-        const btn_num = document.querySelectorAll('.btn-num')
-        const btn_oper = document.querySelectorAll('.btn-oper')
-        const btn_submit = document.querySelector('.btn-submit')
-        const btn_reset = document.querySelector('.btn-reset')
-        let oper = ''
-        let a = '', b=''
+        let result = document.querySelector('.text-num'),
+            exp = document.querySelector('.expression')
+        const btn_num = document.querySelectorAll('.btn-num'),
+        btn_oper = document.querySelectorAll('.btn-oper'),
+        btn_submit = document.querySelector('.btn-submit'),
+        btn_reset = document.querySelector('.btn-reset')
+        let oper = '', a = '', b=''
+
+        function calc(num1,num2,oper){
+            if (oper==='+'){
+                return num1*1 + num2*1
+            }
+            if (oper==='-'){
+                return num1*1 - num2*1
+            }
+            if (oper==='x'){
+                return num1*1 * num2*1
+            }
+            if (oper==='/'){
+                return num1*1 / num2*1
+            }
+        }
 
         btn_num.forEach(btn=>{
             btn.addEventListener('click',(e)=>
@@ -79,11 +99,22 @@
                 }
             })
         })
+
         btn_oper.forEach(btn=>{
             btn.addEventListener('click',(e)=>
-            {
-                oper = btn.innerText
-                exp.innerText=`${a} ${oper} ${b}`
+            {   
+                if (a){
+                    if (!oper){
+                        oper = btn.innerText
+                        exp.innerText=`${a} ${oper} ${b}`
+                    } else{
+                        result.innerText = `Ans = ${calc(a,b,oper)}`;
+                        a = calc(a,b,oper)
+                        b = ''
+                        oper = btn.innerText
+                        exp.innerText = `${a} ${oper}`
+                    }
+                }
             })
         })
 
@@ -92,21 +123,11 @@
                 if (!oper){
                     alert('제출 안됨')
                 } else{
-                    if (oper==='+'){
-                        result.innerText += (a*1) + (b*1);
-                    }
-                    if (oper==='-'){
-                        result.innerText = (a*1)-(b*1);
-                    }
-                    if (oper==='*'){
-                        result.innerText = (a*1) * (b*1)
-                    }
-                    if (oper==='/'){
-                        result.innerText = (a*1) / (b*1);
-                    }
+                    result.innerText = `Ans = ${calc(a,b,oper)}`;
                 }
             }
         )
+        
 
         btn_reset.addEventListener('click',(e)=>{
             result.innerText='Ans = '

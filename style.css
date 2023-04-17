@@ -1,0 +1,58 @@
+button{
+    padding: 0;
+    margin: 0;
+    border: 1px solid;
+}
+
+.btn-wrap{
+    width: 280px;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: pink;
+    padding: 20px;
+    padding-top: 0;
+
+    border-radius: 0 0 5% 5%/0 0 10% 10%;
+}
+.btn-num{
+    width: 70px;
+    background-color: #EDBBCB;
+}
+.btn-reset{
+    width: 210px;
+    background-color: hotpink;
+
+}
+.btn-submit{
+    width: 70px;
+    background-color: palevioletred;
+}
+.btn-oper{
+    width: 70px;
+    background-color: palevioletred;
+
+}
+.zero{
+    width: 210px;
+}
+.expression{
+    height: 20px;
+    width: 280px;
+    background-color: #F2DEE9;
+    color: gray;
+    margin: 0;
+    
+    font-size: 0.8em;
+}
+.text-num{
+    background-color: #F2DEE9;
+    margin: 0;
+
+}
+.text-area{
+    width: 280px;
+    padding: 20px;
+    background-color: #FCAEBB;
+    border-radius: 10% 10% 0 0 / 20% 20% 0 0;
+    
+}

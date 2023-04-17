@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        .btn-wrap{
+            width: 280px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .btn-num{
+            width: 70px;
+        }
+        .btn-reset{
+            width: 210px;
+        }
+        .btn-submit{
+            width: 70px;
+        }
+        .btn-oper{
+            width: 70px;
+        }
+        .zero{
+            width: 210px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p class='text-num'>
+            Ans = &nbsp;
+        </p>
+        <p class="expression">
+
+        </p>
+    </div>
+    <div class = 'btn-wrap'>
+        <button type="reset" class = 'btn-reset'>AC</button>
+        <button type='submit' class = 'btn-submit'>=</button>
+        <button class = 'btn-num'>1</button>
+        <button class = 'btn-num'>2</button>
+        <button class = 'btn-num'>3</button>
+        <button class = 'btn-oper'>+</button>
+        <button class = 'btn-num'>4</button>
+        <button class = 'btn-num'>5</button>
+        <button class = 'btn-num'>6</button>
+        <button class = 'btn-oper'>-</button>
+        <button class = 'btn-num'>7</button>
+        <button class = 'btn-num'>8</button>
+        <button class = 'btn-num'>9</button>
+        <button class = 'btn-oper'>*</button>
+        <button class = 'btn-num zero'>0</button>
+        
+        <button class = 'btn-oper'>/</button>
+
+    </div>
+    <script>
+        let result = document.querySelector('.text-num')
+        let exp = document.querySelector('.expression')
+        const btn_num = document.querySelectorAll('.btn-num')
+        const btn_oper = document.querySelectorAll('.btn-oper')
+        const btn_submit = document.querySelector('.btn-submit')
+        const btn_reset = document.querySelector('.btn-reset')
+        let oper = ''
+        let a = '', b=''
+
+        btn_num.forEach(btn=>{
+            btn.addEventListener('click',(e)=>
+            {
+                if (oper){
+                    b+=btn.innerText;
+                    exp.innerText=`${a} ${oper} ${b}`
+                } else{
+                    a+=btn.innerText;
+                    exp.innerText=`${a} ${oper} ${b}`
+                }
+            })
+        })
+        btn_oper.forEach(btn=>{
+            btn.addEventListener('click',(e)=>
+            {
+                oper = btn.innerText
+                exp.innerText=`${a} ${oper} ${b}`
+            })
+        })
+
+        btn_submit.addEventListener('click',(e)=>
+            {
+                if (!oper){
+                    alert('제출 안됨')
+                } else{
+                    if (oper==='+'){
+                        result.innerText += (a*1) + (b*1);
+                    }
+                    if (oper==='-'){
+                        result.innerText = (a*1)-(b*1);
+                    }
+                    if (oper==='*'){
+                        result.innerText = (a*1) * (b*1)
+                    }
+                    if (oper==='/'){
+                        result.innerText = (a*1) / (b*1);
+                    }
+                }
+            }
+        )
+
+        btn_reset.addEventListener('click',(e)=>{
+            result.innerText='Ans = '
+            a=''
+            b=''
+            oper=''
+            exp.innerText=''
+        }
+        )
+
+        
+
+    </script>
+    <!-- <script src="index.js"></script> -->
+</body>
+</html>
